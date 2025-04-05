@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TraffiZen</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./fontawesome-free-6.7.2-web/css/all.min.css">
+  <link rel="stylesheet" href="tstyle.css">
+  <!-- <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Poppins', sans-serif;
+    }
+    .navbar {
+      background-color: #ffffff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .navbar-brand {
+      font-weight: 600;
+      color: #007bff;
+    }
+    .nav-link {
+      color: #333;
+    }
+    .nav-link:hover {
+      color: #007bff;
+    }
+    .Home {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 80px 5%;
+    }
+    .heading {
+      max-width: 500px;
+    }
+    .head {
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+    .imgc img {
+      max-width: 400px;
+      border-radius: 10px;
+    }
+    #routeChecker {
+      background: #fff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      margin: auto;
+    }
+    .form-control {
+      border-radius: 8px;
+    }
+    #map {
+      width: 100%;
+      max-width: 800px;
+      height: 400px;
+      margin: auto;
+      border-radius: 10px;
+      background: #e9ecef;
+    }
+    footer {
+      background: #222;
+      color: #ddd;
+      padding: 20px;
+      text-align: center;
+    }
+    @media (max-width: 991px) {
+      .Home {
+        flex-direction: column;
+        text-align: center;
+      }
+      .imgc img {
+        margin-top: 20px;
+        width: 100%;
+      }
+    }
+  </style> -->
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container">
+    <a class="navbar-brand" href="#">🚦 TraffiZen</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#alert">Alerts</a></li>
+        <li class="nav-item"><a class="nav-link" href="#favorites">Saved Routes</a></li>
+        <li class="nav-item"><a class="nav-link" href="#map">Live Map</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
+      </ul>
+      <div class="dropdown">
+        <a class="btn btn-light dropdown-toggle" href="#" id="profileDropdown" data-bs-toggle="dropdown">
+          <i class="fa-solid fa-user"></i> Profile
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+
+          <li>
+            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+              Login
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#registerModal">
+              Register
+            </a>
+          </li>
+        </ul>
+       
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Home Section -->
+<section class="Home container d-flex align-items-center justify-content-between">
+  <div class="heading">
+    <h1 class="head">Welcome to TraffiZen</h1>
+    <p class="lead">Plan your routes, avoid traffic, and save time with realtime updates.</p>
+    <a href="#routeChecker" class="btn btn-primary btn-lg mt-3">Check Route</a>
+  </div>
+  <div class="imgc">
+    <img src="C:/Users/dnyan/Downloads/Smart-Traffic-Management-and-Monitoring-System-Using-IOT-and-Arduino-Project.jpg" alt="Traffic Management">
+  </div>
+</section>
+<!-- Alerts -->
+ <section id="alert">
+  
+
+ </section>
+
+<!-- Route Checker -->
+<section id="routeChecker" class="container py-5 text-center">
+  <h2>🚗 Check Your Route</h2>
+  <div class="routebox d-flex flex-column align-items-center">
+    <input type="text" class="form-control mb-3" id="start" placeholder="Start location">
+    <input type="text" class="form-control mb-3" id="end" placeholder="Destination">
+    <button class="btn btn-success">Check Traffic</button>
+    <button class="btn btn-outline-primary mt-2" onclick="saveRoute()">Save Route</button>
+
+  </div>
+</section>
+
+<!-- Map Section -->
+<section id="map-section" class="container py-5 text-center">
+  <h3>Live Traffic Map</h3>
+  <div id="map"></div>
+</section>
+
+<!-- Favorite Routes -->
+<section id="favorites" class="container py-5 text-center">
+  <h3 style="font-weight: bold;"> Favourite Routes</h3>
+  <ul id="favoritesList" class="list-group">
+    <li>Karvenagar to Dehuroad</li>
+    <li>Pune to Karvenagar</li>
+    <li>Nal Stop to Warje</li>
+  </ul>
+</section>
+
+<div class="card" style="width: 18rem;">
+  <img src="https://play-lh.googleusercontent.com/pCQw51XRP4UPr-FCYDjvNnEpFa0HDGJjjLDldN3rmw4KkwhqPu0PZXE8EopmAxzH9mQ" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title"> Today's Weather</h5>
+    <p class="card-text">Get real time updates regarding weather.</p>
+    <a href="#" class="btn btn-primary">Go to App</a>
+  </div>
+</div>
+
+<!-- About Section -->
+<section id="about" class="container py-5 text-center">
+  <h3>About Us</h3>
+  <p>TraffiZen is dedicated to making urban travel smoother and smarter. Our system provides real-time traffic updates, alternate routes,weather alerts  and congestion alerts to help you reach your destination faster.</p>
+  <p>We believe in using technology to enhance road safety and efficiency. Join us in building a better commute experience!</p>
+</section>
+
+<!-- Footer -->
+<footer class="footer text-center py-4">
+  <div class="container">
+    <p>© 2025 TraffiZen. All rights reserved.</p>
+  </div>
+</footer>
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Login</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="loginForm">
+          <div class="mb-3">
+            <label for="loginEmail" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="loginEmail" required>
+          </div>
+          <div class="mb-3">
+            <label for="loginPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="loginPassword" required>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Register Modal -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="registerModalLabel">Register</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="registerForm">
+          <div class="mb-3">
+            <label for="registerEmail" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="registerEmail" required>
+          </div>
+          <div class="mb-3">
+            <label for="registerPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="registerPassword" required>
+          </div>
+          <button type="submit" class="btn btn-success w-100">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Load Google Maps API -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxwiQ1jpSsJnd7B7mLvqScnoZYfbKkq-k&callback=initMap"></script>
+<script src="script.js">
+</script>
+
+</body>
+</html>
